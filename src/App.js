@@ -12,7 +12,7 @@ function App() {
   const mbudget = 1000;
 
   const [meals, setMeals] = useState([]);
-  const [filtered, setFiltered] = useState(meals);
+  const [filtered, setFiltered] = useState([]);
 
   const [alertInfo, setAlert] = useState([]);
   const [calspent, setCalspent] = useState(0);
@@ -37,10 +37,10 @@ function App() {
 
     if (meal) {
       setMeals(m => [...m, meal]);
-      setMoneyspent(o => o + +meal.price);
+      setMoneyspent(o => o + Number(meal.price));
       setCalspent(o => o + +meal.cal);
       setAlert(old => [...old, newrec]);
-      setFiltered(meals);
+      setFiltered(m => [...m, meal]);
     } else {
       setAlert(old => [...old, newfailed]);
     }
@@ -57,7 +57,7 @@ function App() {
 
   };
   const limitcheck = () => {
-    if (calspent > climit) {
+    if (calspent > climit ) {
       const cexceeded = {
         set: true,
         msg: 'Your Daily Calorie limit is exceeded!!',
@@ -112,7 +112,7 @@ function App() {
       <div className='container'>
         <AddItem addMeals={addMeals} items={meals} />
 
-        {(filtered.length &&
+        {(filtered &&
           <>
             <div className='search'> <label className="search-text">Search: </label>
               <input id="search-box" onChange={filterBySearch} />

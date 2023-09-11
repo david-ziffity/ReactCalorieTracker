@@ -26,9 +26,9 @@ const AddItem = ({ items, addMeals }) => {
                 ':',
                 now.getSeconds()
               ].join('');
-            setMeal({...meal,date: date});
+           
         if (meal.name && meal.cal && meal.price) {
-            addMeals(meal);
+            addMeals({...meal,date: date});
         } else {
             addMeals();
         }
